@@ -1,57 +1,71 @@
-# Instagram Authenticity Detector: A High-Fidelity System to Identify Fake Accounts
+
+## Instagram Authenticity Detector: A High-Fidelity System to Identify Fake Accounts
 
 ## Project Goal
 
-This project was built to address a critical challenge in platform integrity: reliably and automatically distinguishing between **genuine Instagram users** and **inauthentic profiles (bots or fakes)**. Our final model achieves high accuracy by looking beyond surface-level data, focusing instead on subtle, behavioral indicators.
+This project developed a high-performance **Ensemble Machine Learning Classifier** to automatically distinguish between **authentic (real)** and **inauthentic (fake/bot)** profiles on Instagram. The system's primary value is to provide a reliable tool for platform integrity, ensuring businesses and users interact with genuine accounts.
 
-The deliverable is a high-performing **Ensemble Model** deployed in a **Streamlit dashboard** for instant, actionable risk assessment.
+The project showcases a complete pipeline, from **innovative feature engineering** to **production-ready deployment** via a Streamlit dashboard.
 
-***
+-----
 
-## The Technical Advantage: Custom Feature Engineering
+## Technical Core: Custom Feature Engineering & Production Pipeline
 
-The key to our model's success wasn't just the algorithm; it was the data preparation. We found that raw profile metrics were not enough.
+The success of our $94\%$ F1-Score was not just due to the model, but the custom feature creation, which amplified subtle signals of deception.
 
-### The SuspicionScore
+### 1\. The SuspicionScore
 
-* **Innovation:** We engineered a composite metric called the **`SuspicionScore`** within the `model_resources/preprocessing.py` module.
-* **What it does:** This score aggregates multiple low-level risk factors (e.g., zero posts, low engagement ratios, missing profile details) into a single, highly predictive numerical value. This amplified the subtle signals of deception, which is a common challenge in high-stakes classification.
+  * **Innovation:** We engineered a composite metric called the **`SuspicionScore`** within the `model_resources/preprocessing.py` module.
+  * **What it does:** This score aggregates multiple low-level risk factors (e.g., zero posts, low engagement ratios, missing profile details) into a single, weighted risk indicator, dramatically improving the model's ability to spot hidden patterns of fraud.
 
-### The Final Model: A Robust Ensemble
+### 2\. Workflow & Deployment Traceability
 
-After rigorous testing (documented in `notebooks/insta.ipynb`), we finalized an **Ensemble Voting Classifier** (Soft Voting) in the `notebooks/insta_model.ipynb`. Combining the predictive power of several top-performing models ensures that our predictions are not only accurate but also **stable** and **generalizable** against new, unseen fake accounts.
+Our process clearly separates the experimental phase from the production phase:
 
-***
+| Phase | Notebook/File | Key Action |
+| :--- | :--- | :--- |
+| **Model Evaluation** | `notebooks/insta.ipynb` | Comprehensive **EDA** and **GridSearch** across multiple base models (XGBoost, KNN, etc.) to select the best candidates. |
+| **Model Finalization** | `notebooks/insta_model.ipynb` | **Trained the final Ensemble Voting Classifier**, serialized the complete model and scaler using **`joblib.dump()`**, and generated final metrics. |
+| **Deployment** | **`main.py`** | **Loads the saved pipeline using `joblib.load()`** and powers the Streamlit dashboard for real-time predictions. |
+
+-----
 
 ## Key Performance Metrics
 
-The model demonstrates exceptional capability in identifying the critical minority class (Fake Accounts), which is essential in a classification project of this nature:
+The Ensemble Model provides high confidence for the critical 'Fake Account' class:
 
 | Metric | Value | Interpretation |
 | :--- | :--- | :--- |
-| **Accuracy** | **0.94** | The overall correctness of the system's predictions. |
-| **F1-Score (Fake Class)** | **0.94** | Indicates a superb balance between **Precision** (avoiding false positives) and **Recall** (catching all fake accounts). This is the metric that matters most for risk detection. |
+| **Accuracy** | **0.94** | High overall correctness of predictions. |
+| **F1-Score (Fake Class)** | **0.94** | **The critical metric for risk:** Excellent balance between Precision (avoiding false alarms) and Recall (catching true fakes). |
 
 *Reference: `model_metrics.csv`*
 
-***
+-----
 
-## Repository Structure and Execution
+## Repository Structure
 
-This repository is organized to showcase the complete data science pipeline, from exploratory work to the final deployed product.
+The files are organized into logical groups to separate development work from production assets.
 
-| File/Folder | Purpose |
-| :--- | :--- |
-| **`main.py`** | **The Deployed App.** Runs the Streamlit dashboard for real-time predictions. |
-| **`notebooks/insta.ipynb`** | **Exploratory Phase.** Contains the initial EDA, feature engineering, and the comparative evaluation/GridSearch of candidate models. |
-| **`notebooks/insta_model.ipynb`** | **Production Phase.** Focuses on training the final Ensemble Classifier, saving the full pipeline, and generating final metrics. |
-| **`model_resources/`** | **The Production Assets.** Stores the saved `insta_voting_model.pkl`, the `power_transformer.pkl` for scaling, and the `preprocessing.py` logic. |
-| **`BI Dashboard/`** | **Data Visualization.** Contains the Power BI dashboard (`insta.pbix`) for a visual exploration of the dataset. |
-| **`Insta_train.csv` / `Insta_test.csv`** | **Data.** The necessary datasets for reproducibility. |
+```
+INSTA/
+├── main.py                          <-- The Streamlit App (Loads model via joblib.load)
+├── Insta\_train.csv                  <-- Training Dataset
+├── Insta\_test.csv                   <-- Test Dataset
+├── notebooks/
+│   ├── insta.ipynb                  <-- EDA, Feature Engineering, and Base Model Evaluation
+│   └── insta\_model.ipynb            <-- Final Ensemble Training, Persistence (joblib.dump)
+├── model\_resources/
+│   ├── insta\_voting\_model.pkl      <-- Saved Ensemble Model Pipeline
+│   └── preprocessing.py             <-- Production Logic for SuspicionScore
+├── BI Dashboard/
+│   └── insta.pbix                   <-- Power BI Dashboard Asset
+└── README.md                        <-- This documentation
+```
 
 ### How to Run the Live Dashboard
 
-1.  **Install requirements:** Make sure all libraries (streamlit, pandas, joblib, sklearn, etc.) are installed.
+1.  **Install requirements:** Ensure all necessary Python libraries (streamlit, joblib, sklearn, pandas, etc.) are installed.
 2.  **Execute:** Run the application from your terminal:
     ```bash
     streamlit run main.py
