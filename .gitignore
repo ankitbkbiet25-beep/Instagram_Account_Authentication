@@ -1,0 +1,15 @@
+__pycache__/
+*.pyc
+venv/
+env/
+.env
+
+.ipynb_checkpoints/
+.vscode/
+
+~$*.xlsx
+
+.DS_Store
+Thumbs.db
+
+BI Dashboard/__pycache__/
