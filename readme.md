@@ -10,10 +10,9 @@ The project showcases a complete pipeline, from **innovative feature engineering
 ## Dashboard Preview
 Below is a live look at the Streamlit web application and the Power BI reporting dashboard built for this project:
 
-![Streamlit Dashboard]('insights_ss\Screenshot 2026-04-30 103640.png')
-*Real-time inference dashboard powered by Streamlit.*
+![Streamlit Dashboard](insights_ss\Screenshot 2026-04-30 103640.png)
 
-![Power BI Dashboard]('insights_ss\Insta_bi_ss.png')
+![Power BI Dashboard](insights_ss\Insta_bi_ss.png)
 *High-level business intelligence metrics tracking fake account trends.*
 
 -----
