@@ -7,8 +7,8 @@ import joblib
 from model_resources.preprocessing import preprocess
 
 
-train=pd.read_csv("Insta_train.csv")
-test=pd.read_csv("Insta_test.csv")
+train=pd.read_csv("data\Insta_train.csv")
+test=pd.read_csv("data\Insta_test.csv")
 
 dataset=pd.concat([train,test],ignore_index=True)
 df=preprocess(dataset)

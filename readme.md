@@ -7,6 +7,15 @@ This project developed a high-performance **Ensemble Machine Learning Classifier
 
 The project showcases a complete pipeline, from **innovative feature engineering** to **production-ready deployment** via a Streamlit dashboard.
 
+## Dashboard Preview
+Below is a live look at the Streamlit web application and the Power BI reporting dashboard built for this project:
+
+![Streamlit Dashboard]('insights_ss\Screenshot 2026-04-30 103640.png')
+*Real-time inference dashboard powered by Streamlit.*
+
+![Power BI Dashboard]('insights_ss\Insta_bi_ss.png')
+*High-level business intelligence metrics tracking fake account trends.*
+
 -----
 
 ## Technical Core: Custom Feature Engineering & Production Pipeline
@@ -49,19 +58,20 @@ The files are organized into logical groups to separate development work from pr
 
 ```
 INSTA/
+├── data/
+│   ├── Insta_train.csv              <-- Training Dataset
+│   └── Insta_test.csv               <-- Test Dataset
 ├── main.py                          <-- The Streamlit App (Loads model via joblib.load)
-├── Insta\_train.csv                  <-- Training Dataset
-├── Insta\_test.csv                   <-- Test Dataset
+├── requirements.txt                 <-- Project dependencies
 ├── notebooks/
 │   ├── insta.ipynb                  <-- EDA, Feature Engineering, and Base Model Evaluation
-│   └── insta\_model.ipynb            <-- Final Ensemble Training, Persistence (joblib.dump)
-├── model\_resources/
-│   ├── insta\_voting\_model.pkl      <-- Saved Ensemble Model Pipeline
+│   └── insta_model.ipynb            <-- Final Ensemble Training, Persistence (joblib.dump)
+├── model_resources/
+│   ├── insta_voting_model.pkl      <-- Saved Ensemble Model Pipeline
 │   └── preprocessing.py             <-- Production Logic for SuspicionScore
 ├── BI Dashboard/
 │   └── insta.pbix                   <-- Power BI Dashboard Asset
 └── README.md                        <-- This documentation
-```
 
 ### How to Run the Live Dashboard
 
