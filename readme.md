@@ -13,7 +13,6 @@ Below is a live look at the Streamlit web application and the Power BI reporting
 ![Streamlit Dashboard](insights_ss/Screenshot%202026-04-30%20103640.png)
 
 ![Power BI Dashboard](insights_ss/Insta_bi_ss.png)
-*High-level business intelligence metrics tracking fake account trends.*
 
 -----
 
